@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.google.play.services)
 }
 
 android {
@@ -25,8 +26,10 @@ android {
                 "proguard-rules.pro"
             )
         }
-        debug {
+        getByName("debug") {
             applicationIdSuffix = ".debug"
+            isDebuggable = true
+
         }
     }
     compileOptions {
@@ -39,6 +42,9 @@ android {
 }
 
 dependencies {
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics.ktx)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
